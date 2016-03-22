@@ -22,7 +22,7 @@
     "homebridge": ">=0.2.0"
   },
   "dependencies": {
-    "node-raumfeld": "^0.1.0"
+    "node-raumfeld": "^0.2.0"
   },
   "devDependencies": {
     "homebridge": ">=0.2.0"

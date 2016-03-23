@@ -2,17 +2,14 @@ var RaumfeldManager = require("node-raumfeld");
 var loglevel = require("loglevel");
 var RendererAccessory = require("./lib/RaumfeldRendererAccessory");
 var utils = require("./lib/utils");
-//loglevel.setLevel("debug");
-var Accessory, Service, Characteristic, UUIDGen;
+loglevel.setLevel("debug");
+
 
 module.exports = function(homebridge) {
     // Accessory must be created from PlatformAccessory Constructor
     Accessory = homebridge.hap.Accessory;
     Homebridge = homebridge;
 
-    // Service and Characteristic are from hap-nodejs
-    Service = homebridge.hap.Service;
-    Characteristic = homebridge.hap.Characteristic;
     utils.addSupportTo(RendererAccessory, Accessory);
     homebridge.registerPlatform("homebridge-raumfeld", "Raumfeld", RaumfeldPlatform);
 }
@@ -27,6 +24,7 @@ function RaumfeldPlatform(log, config, api) {
 }
 
 RaumfeldPlatform.prototype.accessories = function(callback) {
+    console.log("Get accessories");
     var self = this;
     setTimeout(function() {
         callback(self.createAccessories());
@@ -42,8 +40,4 @@ RaumfeldPlatform.prototype.createAccessories = function() {
   });
 
   return accessories;
-}
-
-RaumfeldPlatform.prototype.getServices = function(accessory) {
-    console.log("get services on platform");
 }

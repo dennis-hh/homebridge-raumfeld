@@ -2,8 +2,7 @@ var RaumfeldManager = require("node-raumfeld");
 var loglevel = require("loglevel");
 var RendererAccessory = require("./lib/RaumfeldRendererAccessory");
 var utils = require("./lib/utils");
-loglevel.setLevel("debug");
-
+//loglevel.setLevel("debug");
 
 module.exports = function(homebridge) {
     // Accessory must be created from PlatformAccessory Constructor
@@ -24,7 +23,6 @@ function RaumfeldPlatform(log, config, api) {
 }
 
 RaumfeldPlatform.prototype.accessories = function(callback) {
-    console.log("Get accessories");
     var self = this;
     setTimeout(function() {
         callback(self.createAccessories());

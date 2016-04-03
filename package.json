@@ -1,10 +1,14 @@
 {
   "name": "homebridge-raumfeld",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Homebridge plugin for Raumfeld support: https://github.com/nfarina/homebridge",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dennis-hh/homebridge-raumfeld.git"
   },
   "keywords": [
     "Homebridge",
@@ -22,7 +26,7 @@
     "homebridge": ">=0.2.0"
   },
   "dependencies": {
-    "node-raumfeld": "^0.2.0"
+    "node-raumfeld": "^0.4.2"
   },
   "devDependencies": {
     "homebridge": ">=0.2.0"

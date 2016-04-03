@@ -1,5 +1,5 @@
 var RaumfeldManager = require("node-raumfeld");
-var loglevel = require("loglevel");
+//var loglevel = require("loglevel");
 var VolumeCharacteristic = require("./lib/VolumeCharacteristic");
 //loglevel.setLevel("debug");
 

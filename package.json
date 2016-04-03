@@ -1,6 +1,6 @@
 {
   "name": "homebridge-raumfeld",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Homebridge plugin for Raumfeld support: https://github.com/nfarina/homebridge",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "hap-nodejs": "^0.2.8",
-    "node-raumfeld": "^0.4.2"
+    "node-raumfeld": "^0.4.4"
   },
   "devDependencies": {
     "homebridge": ">=0.2.0"

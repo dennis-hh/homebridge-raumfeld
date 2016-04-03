@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0
+- first stable release
+- added recovery of cached accessories on restart
+- added auto-update of Raumfeld renderers
+
 ## 0.0.4
 - added missing dependency
 

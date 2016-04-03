@@ -17,14 +17,14 @@ function RaumfeldPlatform(log, config, api) {
     this.log = log;
     this.api = api;
     this.config = config;
-    this.accessories = [];
+    this.accessories = {};
     this.manager = new RaumfeldManager();
 
     var self = this;
 
     this.api.on('didFinishLaunching', function() {
     	self.log("Plugin finished launching");
-        self.manager.discover("virtual");
+        self.manager.discover("virtual", 20000);
         self.manager.on("rendererFound", function(renderer) {
             self.registerAccessory(renderer);
         });
@@ -55,15 +55,22 @@ RaumfeldPlatform.prototype.registerAccessory = function(renderer) {
               this.log(accessory.displayName + " already registered; skipping");
               return;
           }
-          this.log("unregistering " + accessory.displayName);
-          this.api.unregisterPlatformAccessories("homebridge-raumfeld", "Raumfeld", [this.accessories[accessory.UUID]]);
+          //unregister accessory since apparently a zone was formed with the same UUID
+          this.unregisterAccessory(accessory);
+
           //wait one cycle
           return;
       }
       accessory.reachable = true;
       this.accessories[accessory.UUID] = accessory;
-      this.log("registering " + accessory.displayName);
+      this.log("registering " + accessory.displayName + " with UUID " + accessory.UUID);
       this.api.registerPlatformAccessories("homebridge-raumfeld", "Raumfeld", [accessory]);
+}
+
+RaumfeldPlatform.prototype.unregisterAccessory = function(accessory) {
+    this.log("Unregistering " + this.accessories[accessory.UUID].displayName + " with UUID " + accessory.UUID);
+    this.api.unregisterPlatformAccessories("homebridge-raumfeld", "Raumfeld", [this.accessories[accessory.UUID]]);
+    delete this.accessories[accessory.UUID];
 }
 
 RaumfeldPlatform.prototype.createAccessory = function(renderer) {
@@ -83,6 +90,7 @@ RaumfeldPlatform.prototype.createAccessory = function(renderer) {
 }
 
 RaumfeldPlatform.prototype.addSwitchService = function(accessory, renderer) {
+    var self = this;
     accessory.on("identify", function(paired, callback) {
         console.log("identify " + accessory.displayName + " - is paired: " + paired);
         callback();
@@ -98,6 +106,8 @@ RaumfeldPlatform.prototype.addSwitchService = function(accessory, renderer) {
         .on('get', function(callback) {
             renderer.getState().then(function(state) {
                 callback(null, state);
+            }, function(reason) {
+                self.unregisterAccessory(accessory);
             })
         })
         .on('set', function(on, callback) {
@@ -116,6 +126,8 @@ RaumfeldPlatform.prototype.addSwitchService = function(accessory, renderer) {
             .on('get', function(callback) {
                 renderer.getVolume().then(function(volume) {
                     callback(null, Number(volume));
+                }, function(reason) {
+                    self.unregisterAccessory(accessory);
                 })
             })
             .on('set', function(volume, callback) {

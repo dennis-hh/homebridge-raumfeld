@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.4
+- added missing dependency
+
 ## 0.0.3
 - many changes under the hood
 - added recovery of cached accessories on restart

@@ -52,7 +52,7 @@ RaumfeldPlatform.prototype.registerAccessory = function(renderer) {
     var accessory = this.createAccessory(renderer);
       if(accessory.UUID in this.accessories) {
           if(accessory.displayName === this.accessories[accessory.UUID].displayName) {
-              this.log(accessory.displayName + " already registered; skipping");
+              //this.log(accessory.displayName + " already registered; skipping");
               return;
           }
           //unregister accessory since apparently a zone was formed with the same UUID
@@ -63,7 +63,7 @@ RaumfeldPlatform.prototype.registerAccessory = function(renderer) {
       }
       accessory.reachable = true;
       this.accessories[accessory.UUID] = accessory;
-      this.log("registering " + accessory.displayName + " with UUID " + accessory.UUID);
+      this.log("Registering " + accessory.displayName + " with UUID " + accessory.UUID);
       this.api.registerPlatformAccessories("homebridge-raumfeld", "Raumfeld", [accessory]);
 }
 

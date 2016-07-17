@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2
+- updated hap-nodejs dependency
+
+## 0.1.1
+- updated readme
+- removed too verbose logging
+
 ## 0.1.0
 - first stable release
 - added recovery of cached accessories on restart
